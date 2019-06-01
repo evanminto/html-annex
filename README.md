@@ -46,3 +46,16 @@ platform standards (including Custom Elements and Shadow DOM) that are supported
 in Chrome, Safari, Firefox, Samsung Internet, Opera, and more. Because these
 standards are built into the browser, Web Components should work with all major
 frameworks. They’re basically just like regular HTML elements!
+
+### What about server rendering?
+
+A common complaint about Web Components is that there isn’t a built-in solution
+for rendering their contents on the server for purposes of SEO and performance.
+But pre-rendering the Shadow DOM on the server is only one possible option. The
+other approach, which HTML Annex uses, is to build fallback HTML on the server
+and deliver that. The fallback content is usable immediately, and once the
+JavaScript loads, the Web Components can replace it with the full experience.
+
+This has the added benefit of making components usable in situations where
+rendering JavaScript framework code on the server is impractical, such as some
+legacy PHP setups.
