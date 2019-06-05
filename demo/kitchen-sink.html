@@ -25,27 +25,27 @@
       </form>
     </annex-form>
 
-    <annex-dropdown-menu-button for="dropdown">
+    <annex-menu-button for="dropdown">
+    Test
+    </annex-menu-button>
+
+    <annex-menu-button for="dropdown">
       <template>
         <button>Menu</button>
       </template>
-    </annex-dropdown-menu-button>
+    </annex-menu-button>
 
-    <annex-dropdown-menu id="dropdown">
+    <annex-menu id="dropdown">
       <template>
-        <annex-dropdown-menu-item>
-          <button>Action 1</button>
-        </annex-dropdown-menu-item>
+        <annex-menu-item>
+          <button onclick="alert('test')">Alert</button>
+        </annex-menu-item>
 
-        <annex-dropdown-menu-item>
-          <button>Action 2</button>
-        </annex-dropdown-menu-item>
-
-        <annex-dropdown-menu-item>
-          <button>Action 3</button>
-        </annex-dropdown-menu-item>
+        <annex-menu-item>
+          <button onclick="prompt('Yes or No?')">Prompt</button>
+        </annex-menu-item>
       </template>
-    </annex-dropdown-menu>
+    </annex-menu>
 
     <annex-tabs>
       <template>

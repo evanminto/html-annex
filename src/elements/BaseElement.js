@@ -1,4 +1,5 @@
 import { LitElement } from 'lit-element';
+import logManager from '../logManager';
 
 export default class BaseElement extends LitElement {
   static get defaultRole() {
@@ -19,7 +20,7 @@ export default class BaseElement extends LitElement {
 
   static define(newName = '') {
     if (!('customElements' in window)) {
-      console.warn("Annex Error: Failed to define element. Your browser doesn't support custom elements.");
+      logManager.warn("Failed to define element. Your browser doesn't support custom elements.");
       return;
     }
 

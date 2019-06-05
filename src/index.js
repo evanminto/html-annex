@@ -6,6 +6,9 @@ import AccordionElement from './elements/AccordionElement.js';
 import InstructionsElement from './elements/InstructionsElement.js';
 import FormElement from './elements/FormElement.js';
 import StatusElement from './elements/StatusElement.js';
+import MenuElement from './elements/MenuElement.js';
+import MenuItemElement from './elements/MenuItemElement.js';
+import MenuButtonElement from './elements/MenuButtonElement.js';
 
 const elements = [
   TabsElement,
@@ -16,6 +19,9 @@ const elements = [
   InstructionsElement,
   FormElement,
   StatusElement,
+  MenuElement,
+  MenuItemElement,
+  MenuButtonElement,
 ]
 
 const HTMLAnnex = {
