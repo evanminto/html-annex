@@ -1,7 +1,16 @@
 class ObservedItem {
-  constructor(element, typeMap) {
+  constructor(element, typeMap, filter) {
     this.element = element;
     this.typeMap = typeMap;
+    this.filter = filter;
+  }
+
+  matchElement(el) {
+    if (this.filter) {
+      return el.matches(this.filter);
+    }
+
+    return true;
   }
 
   matchEvent(event) {
@@ -45,8 +54,16 @@ export class KeyboardObserver {
     this.activeObservedItem = undefined;
   }
 
-  observe(el, typeMap = {}) {
-    this.observedItems.push(new ObservedItem(el, typeMap));
+  addItem(item) {
+    this.observedItems.push(item);
+  }
+
+  observe(oneOrManyEls, { types = {}, filter = '' }) {
+    const elementsArr = [].concat(oneOrManyEls);
+
+    elementsArr.forEach(el => {
+      this.addItem(new ObservedItem(el, types, filter));
+    });
 
     if (!this.observing) {
       this.startObserving();
@@ -57,6 +74,10 @@ export class KeyboardObserver {
     document.body.addEventListener('focusout', event => {
       event.composedPath().forEach((el => {
         if (this.activeObservedItem && el === this.activeObservedItem.element) {
+          this.activeObservedItem.element.dispatchEvent(new CustomEvent('annex-key-inactive', {
+            bubbles: true,
+          }));
+
           this.activeObservedItem = undefined;
         }
       }));
@@ -64,11 +85,14 @@ export class KeyboardObserver {
 
     document.body.addEventListener('focusin', event => {
       const path = event.composedPath();
+      const filteredObservedItems = this.observedItems.filter(
+        item => item.matchElement(event.target)
+      );
       let item;
 
       for (let i = 0; i < path.length; i++) {
         const el = path[i];
-        const matches = this.observedItems.filter(i => i.element === el);
+        const matches = filteredObservedItems.filter(i => i.element === el);
 
         if (matches.length > 0) {
           item = matches[0];
@@ -78,6 +102,10 @@ export class KeyboardObserver {
 
       if (item) {
         this.activeObservedItem = item;
+
+        this.activeObservedItem.element.dispatchEvent(new CustomEvent('annex-key-active', {
+          bubbles: true,
+        }));
       } else {
         this.activeObservedItem = undefined;
       }
@@ -95,7 +123,7 @@ export class KeyboardObserver {
           event.preventDefault();
         }
 
-        const keyEvent = new CustomEvent('pwc-key', {
+        const keyEvent = new CustomEvent('annex-key', {
           bubbles: true,
           cancelable: true,
           detail: {

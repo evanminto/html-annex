@@ -13,6 +13,23 @@ export default class BaseElement extends LitElement {
     return {};
   }
 
+  static get elementName() {
+    return '';
+  }
+
+  static define(newName = '') {
+    if (!('customElements' in window)) {
+      console.warn("Annex Error: Failed to define element. Your browser doesn't support custom elements.");
+      return;
+    }
+
+    const name = newName || `annex-${this.elementName}`;
+
+    if (name) {
+      customElements.define(name, this);
+    }
+  }
+
   setup() {
     Array.from(this.querySelectorAll('template')).forEach(template => {
       const fragment = document.adoptNode(template.content);

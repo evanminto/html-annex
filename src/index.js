@@ -4,38 +4,28 @@ import TabElement from './elements/TabElement.js';
 import TabPanelElement from './elements/TabPanelElement.js';
 import AccordionElement from './elements/AccordionElement.js';
 import InstructionsElement from './elements/InstructionsElement.js';
+import FormElement from './elements/FormElement.js';
+import StatusElement from './elements/StatusElement.js';
 
-const ProgressiveWebComponents = {
-  defaultCustomElementsMap: {
-    'pwc-tabs': TabsElement,
-    'pwc-tab-list': TabListElement,
-    'pwc-tab': TabElement,
-    'pwc-tab-panel': TabPanelElement,
-    'pwc-accordion': AccordionElement,
-    'pwc-instructions': InstructionsElement,
+const elements = [
+  TabsElement,
+  TabListElement,
+  TabElement,
+  TabPanelElement,
+  AccordionElement,
+  InstructionsElement,
+  FormElement,
+  StatusElement,
+]
+
+const HTMLAnnex = {
+  defineAll() {
+    elements.forEach(el => el.define());
   },
-
-  initialize(customElementNameMap = {}) {
-    if ('customElements' in window) {
-      const map = Object.assign({}, customElementNameMap, this.defaultCustomElementsMap);
-      Object.keys(map).forEach(name => {
-        customElements.define(name, map[name]);
-      });
-    }
-  },
-
-  renameElement(oldName, newName) {
-    const value = this.defaultCustomElementsMap[oldName];
-    this.defaultCustomElementsMap.delete(oldName);
-    this.defaultCustomElementsMap[newName] = value;
-  }
 };
 
-ProgressiveWebComponents.Tabs = TabsElement;
-ProgressiveWebComponents.TabList = TabListElement;
-ProgressiveWebComponents.Tab = TabElement;
-ProgressiveWebComponents.TabPanel = TabPanelElement;
-ProgressiveWebComponents.Accordion = AccordionElement;
-ProgressiveWebComponents.Instructions = InstructionsElement;
+elements.forEach(el => {
+  HTMLAnnex[el.name] = el;
+});
 
-export default ProgressiveWebComponents;
+export default HTMLAnnex;

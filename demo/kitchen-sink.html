@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+  <head>
+    <script type="module">
+      import HTMLAnnex from '../dist/html-annex.js';
+
+      HTMLAnnex.defineAll();
+    </script>
+
+    <style>
+      body > * + * {
+        margin-top: 1.5rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <portal src="portal.html"></portal>
+
+    <annex-form>
+      <form novalidate>
+        <label for="email">Email</label>
+        <input id="email" type="email" required>
+        <button>Submit</button>
+      </form>
+    </annex-form>
+
+    <annex-dropdown-menu-button for="dropdown">
+      <template>
+        <button>Menu</button>
+      </template>
+    </annex-dropdown-menu-button>
+
+    <annex-dropdown-menu id="dropdown">
+      <template>
+        <annex-dropdown-menu-item>
+          <button>Action 1</button>
+        </annex-dropdown-menu-item>
+
+        <annex-dropdown-menu-item>
+          <button>Action 2</button>
+        </annex-dropdown-menu-item>
+
+        <annex-dropdown-menu-item>
+          <button>Action 3</button>
+        </annex-dropdown-menu-item>
+      </template>
+    </annex-dropdown-menu>
+
+    <annex-tabs>
+      <template>
+        <annex-instructions>Use the left and right arrow keys to change tabs</annex-instructions>
+      </template>
+
+      <annex-tab-list>
+        <ul>
+          <li>
+            <annex-tab>
+              <a href="#foo">Foo</a>
+            </annex-tab>
+          </li>
+          <li>
+            <annex-tab>
+              <a href="#bar">Bar</a>
+            </annex-tab>
+          </li>
+          <li>
+            <annex-tab>
+              <a href="#foo2">Foo</a>
+            </annex-tab>
+          </li>
+          <li>
+            <annex-tab>
+              <a href="#bar2">Bar</a>
+            </annex-tab>
+          </li>
+          <li>
+            <annex-tab>
+              <a href="#foo3">Foo</a>
+            </annex-tab>
+          </li>
+          <li>
+            <annex-tab>
+              <a href="#bar3">Bar</a>
+            </annex-tab>
+          </li>
+        </ul>
+      </annex-tab-list>
+
+      <annex-tab-panel id="foo">
+        <section>
+          <h3>Foo</h3>
+        </section>
+      </annex-tab-panel>
+
+      <annex-tab-panel id="bar">
+        <section>
+          <h3>Bar</h3>
+        </section>
+      </annex-tab-panel>
+
+      <annex-tab-panel id="foo2">
+        <section>
+          <h3>Foo</h3>
+        </section>
+      </annex-tab-panel>
+
+      <annex-tab-panel id="bar3">
+        <section>
+          <h3>Bar</h3>
+        </section>
+      </annex-tab-panel>
+
+      <annex-tab-panel id="foo3">
+        <section>
+          <h3>Foo</h3>
+        </section>
+      </annex-tab-panel>
+
+      <annex-tab-panel id="bar2">
+        <section>
+          <h3>Bar</h3>
+        </section>
+      </annex-tab-panel>
+    </annex-tabs>
+
+    <annex-accordion>
+      <template>
+        <annex-instructions>Use the up and down arrow keys to move</annex-instructions>
+      </template>
+
+      <details>
+        <summary>Details</summary>
+        Foo
+          <a href="">Test</a>
+      </details>
+      <details>
+        <summary>Details</summary>
+        Foo
+      </details>
+      <details>
+        <summary>Details</summary>
+        Foo
+      </details>
+      <details>
+        <summary>Details</summary>
+        Foo
+      </details>
+      <details>
+        <summary>Details</summary>
+        Foo
+      </details>
+      <details>
+        <summary>Details</summary>
+        Foo
+      </details>
+      <details>
+        <summary>Details</summary>
+        Foo
+      </details>
+      <details>
+        <summary>Details</summary>
+        Foo
+      </details>
+    </annex-accordion>
+  </body>
+</html>

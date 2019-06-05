@@ -3,6 +3,10 @@ import BaseElement from './BaseElement.js';
 import keyboardObserver from '../keyboardObserver.js';
 
 export default class AccordionElement extends BaseElement {
+  static get elementName() {
+    return 'accordion';
+  }
+
   static get properties() {
     return {
       index: Number,
@@ -27,6 +31,15 @@ export default class AccordionElement extends BaseElement {
 
       ::slotted(details:not(:first-of-type)) {
         border-top: 0;
+      }
+
+      ::slotted(annex-instructions) {
+        visibility: visible;
+      }
+
+      ::slotted(annex-instructions[hidden]) {
+        display: inline;
+        visibility: hidden;
       }
     `;
   }
@@ -55,6 +68,10 @@ export default class AccordionElement extends BaseElement {
     }
   }
 
+  get instructions() {
+    return this.querySelector('annex-instructions');
+  }
+
   getPanelByIndex(index) {
     return this.detailsElements[index];
   }
@@ -73,7 +90,7 @@ export default class AccordionElement extends BaseElement {
 
   setup() {
     super.setup();
-    this.updateFocus();
+    // this.updateFocus();
   }
 
   connectedCallback() {
@@ -82,13 +99,26 @@ export default class AccordionElement extends BaseElement {
     this.index = -1;
 
     keyboardObserver.observe(this, {
-      ArrowUp: true,
-      ArrowDown: true,
-      Home: true,
-      End: true,
+      types: {
+        ArrowUp: true,
+        ArrowDown: true,
+        Home: true,
+        End: true,
+      },
+      filter: 'summary',
     });
 
-    this.addEventListener('pwc-key', event => {
+    this.instructions.hidden = true;
+
+    this.addEventListener('annex-key-active', event => {
+      this.instructions.hidden = false;
+    });
+
+    this.addEventListener('annex-key-inactive', event => {
+      this.instructions.hidden = true;
+    });
+
+    this.addEventListener('annex-key', event => {
       if (event.detail.type === 'ArrowDown') {
         event.preventDefault();
         this.moveNext();
@@ -137,7 +167,9 @@ export default class AccordionElement extends BaseElement {
           }
         }
 
-        this.dispatchEvent(new CustomEvent('pwc-change', {
+        this.updateFocus();
+
+        this.dispatchEvent(new CustomEvent('annex-change', {
           bubbles: true,
         }));
       });
@@ -152,6 +184,7 @@ export default class AccordionElement extends BaseElement {
     } else {
       this.focusIndex = newIndex;
     }
+    this.updateFocus();
   }
 
   movePrevious() {
@@ -162,14 +195,17 @@ export default class AccordionElement extends BaseElement {
     } else {
       this.focusIndex = newIndex;
     }
+    this.updateFocus();
   }
 
   moveStart() {
     this.focusIndex = 0;
+    this.updateFocus();
   }
 
   moveEnd() {
     this.focusIndex = this.summaryElements.length - 1;
+    this.updateFocus();
   }
 
   updated() {
@@ -180,7 +216,5 @@ export default class AccordionElement extends BaseElement {
         }
       });
     }
-
-    this.updateFocus();
   }
 }

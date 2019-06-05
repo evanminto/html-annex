@@ -2,6 +2,10 @@ import { html, css } from 'lit-element';
 import BaseElement from './BaseElement.js';
 
 export default class TabsElement extends BaseElement {
+  static get elementName() {
+    return 'tabs';
+  }
+
   static get properties() {
     return {
       orientation: {
@@ -31,51 +35,51 @@ export default class TabsElement extends BaseElement {
       display: flex;
     }
 
-    :host([orientation='vertical']) ::slotted(pwc-tab-panel) {
+    :host([orientation='vertical']) ::slotted(annex-tab-panel) {
       flex-basis: 100%;
     }
 
-    :host([orientation='vertical']) ::slotted(pwc-tab-list) {
+    :host([orientation='vertical']) ::slotted(annex-tab-list) {
       --tab-direction: column;
       --text-align: left;
     }
 
-    ::slotted(pwc-instructions) {
+    ::slotted(annex-instructions) {
       display: block;
       visibility: visible;
     }
 
-    ::slotted(pwc-instructions[hidden]) {
+    ::slotted(annex-instructions[hidden]) {
       display: block;
       visibility: hidden;
     }
 
-    :host([use-links]) ::slotted(pwc-instructions) {
+    :host([use-links]) ::slotted(annex-instructions) {
       display: none;
     }
     `;
   }
 
   get tabList() {
-    return this.querySelector('pwc-tab-list');
+    return this.querySelector('annex-tab-list');
   }
 
   get tabs() {
     const tabList = this.tabList;
 
     if (tabList) {
-      return tabList.querySelectorAll('pwc-tab');
+      return tabList.querySelectorAll('annex-tab');
     }
 
     return [];
   }
 
   get instructions() {
-    return this.querySelector('pwc-instructions');
+    return this.querySelector('annex-instructions');
   }
 
   get panels() {
-    return this.querySelectorAll('pwc-tab-panel');
+    return this.querySelectorAll('annex-tab-panel');
   }
 
   get selectedTab() {
@@ -83,7 +87,7 @@ export default class TabsElement extends BaseElement {
   }
 
   set selectedTab(tab) {
-    this.index = Array.from(tab.closest('pwc-tab-list').querySelectorAll('pwc-tab')).indexOf(tab);
+    this.index = Array.from(tab.closest('annex-tab-list').querySelectorAll('annex-tab')).indexOf(tab);
   }
 
   get selectedPanel() {
@@ -91,7 +95,7 @@ export default class TabsElement extends BaseElement {
   }
 
   set selectedPanel(panel) {
-    this.index = Array.from(this.querySelectorAll('pwc-tab-panel')).indexOf(panel);
+    this.index = Array.from(this.querySelectorAll('annex-tab-panel')).indexOf(panel);
   }
 
   constructor() {
@@ -107,13 +111,13 @@ export default class TabsElement extends BaseElement {
     this.addEventListener('tab-move-start', () => this.moveStart());
     this.addEventListener('tab-move-end', () => this.moveEnd());
 
-    this.addEventListener('tab-focusout', event => {
+    this.addEventListener('annex-key-inactive', event => {
       if (!this.hasAttribute('use-links')) {
         this.instructions.hidden = true;
       }
     });
 
-    this.addEventListener('tab-focusin', event => {
+    this.addEventListener('annex-key-active', event => {
       if (!this.hasAttribute('use-links')) {
         this.instructions.hidden = false;
       }
@@ -126,7 +130,7 @@ export default class TabsElement extends BaseElement {
     const tab = this.selectedTab;
 
     if (this.instructions) {
-      customElements.whenDefined('pwc-instructions').then(() => {
+      customElements.whenDefined('annex-instructions').then(() => {
         tab.describedById = this.instructions.id;
         this.instructions.hidden = true;
       });
@@ -209,7 +213,7 @@ export default class TabsElement extends BaseElement {
         }
 
         if (tab.selected && this.instructions) {
-          customElements.whenDefined('pwc-instructions').then(() => {
+          customElements.whenDefined('annex-instructions').then(() => {
             tab.describedById = this.instructions.id;
           });
         }

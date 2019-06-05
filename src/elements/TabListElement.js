@@ -3,6 +3,10 @@ import BaseElement from './BaseElement.js';
 import keyboardObserver from '../keyboardObserver.js';
 
 export default class TabListElement extends BaseElement {
+  static get elementName() {
+    return 'tab-list';
+  }
+
   static get defaultRole() {
     return 'tablist';
   }
@@ -31,13 +35,13 @@ export default class TabListElement extends BaseElement {
   }
 
   get useLinks() {
-    const tabs = this.closest('pwc-tabs');
+    const tabs = this.closest('annex-tabs');
 
     return tabs && tabs.matches('[use-links]');
   }
 
   get orientation() {
-    const tabs = this.closest('pwc-tabs');
+    const tabs = this.closest('annex-tabs');
 
     return tabs.orientation;
   }
@@ -46,15 +50,17 @@ export default class TabListElement extends BaseElement {
     super();
 
     keyboardObserver.observe(this, {
-      ArrowRight: true,
-      ArrowLeft: true,
-      ArrowDown: true,
-      ArrowUp: true,
-      Home: true,
-      End: true,
+      types: {
+        ArrowRight: true,
+        ArrowLeft: true,
+        ArrowDown: true,
+        ArrowUp: true,
+        Home: true,
+        End: true,
+      }
     });
 
-    this.addEventListener('pwc-key', event => {
+    this.addEventListener('annex-key', event => {
       if (!this.useLinks) {
         if (event.detail.type === 'ArrowRight') {
           if (this.orientation !== 'vertical') {

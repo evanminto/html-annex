@@ -2,6 +2,10 @@ import { html, css } from 'lit-element';
 import BaseElement from './BaseElement.js';
 
 export default class TabPanelElement extends BaseElement {
+  static get elementName() {
+    return 'tab-panel';
+  }
+
   static get defaultRole() {
     return 'tabpanel';
   }
@@ -34,7 +38,7 @@ export default class TabPanelElement extends BaseElement {
   }
 
   get useLinks() {
-    const tabs = this.closest('pwc-tabs');
+    const tabs = this.closest('annex-tabs');
 
     return tabs && tabs.matches('[use-links]');
   }

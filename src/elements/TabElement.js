@@ -2,6 +2,10 @@ import { html, css } from 'lit-element';
 import BaseElement from './BaseElement.js';
 
 export default class TabElement extends BaseElement {
+  static get elementName() {
+    return 'tab';
+  }
+
   static get properties() {
     return {
       selected: {
@@ -41,7 +45,7 @@ export default class TabElement extends BaseElement {
   }
 
   get useLinks() {
-    const tabs = this.closest('pwc-tabs');
+    const tabs = this.closest('annex-tabs');
 
     return tabs && tabs.matches('[use-links]');
   }

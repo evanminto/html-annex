@@ -3,6 +3,10 @@ import BaseElement from './BaseElement.js';
 import idRegistry from '../idRegistry.js';
 
 export default class InstructionsElement extends BaseElement {
+  static get elementName() {
+    return 'instructions';
+  }
+
   static get defaultAttributes() {
     return {
       id: () => idRegistry.generate(),
