@@ -9,6 +9,7 @@ import StatusElement from './elements/StatusElement.js';
 import MenuElement from './elements/MenuElement.js';
 import MenuItemElement from './elements/MenuItemElement.js';
 import MenuButtonElement from './elements/MenuButtonElement.js';
+import QuantitySelectorElement from './elements/QuantitySelectorElement.js';
 
 const elements = [
   TabsElement,
@@ -22,6 +23,7 @@ const elements = [
   MenuElement,
   MenuItemElement,
   MenuButtonElement,
+  QuantitySelectorElement,
 ]
 
 const HTMLAnnex = {
