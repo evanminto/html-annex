@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/evanminto/html-annex#readme",
   "devDependencies": {
+    "@evanminto/keyboard-observer": "^1.1.1",
     "rollup": "^1.12.4",
     "rollup-plugin-node-resolve": "^5.0.0"
   },

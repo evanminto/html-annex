@@ -1,6 +1,6 @@
 import { html, css } from 'lit-element';
 import BaseElement from './BaseElement.js';
-import keyboardObserver from '../keyboardObserver.js';
+import keyEventDispatcher from '../keyEventDispatcher.js';
 
 export default class MenuElement extends BaseElement {
   static get elementName() {
@@ -35,7 +35,7 @@ export default class MenuElement extends BaseElement {
   constructor() {
     super();
 
-    keyboardObserver.observe(this, {
+    keyEventDispatcher.observe(this, {
       types: {
         Escape: true,
       },

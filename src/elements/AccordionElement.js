@@ -1,6 +1,6 @@
 import { html, css } from 'lit-element';
 import BaseElement from './BaseElement.js';
-import keyboardObserver from '../keyboardObserver.js';
+import keyEventDispatcher from '../keyEventDispatcher.js';
 
 export default class AccordionElement extends BaseElement {
   static get elementName() {
@@ -98,7 +98,7 @@ export default class AccordionElement extends BaseElement {
 
     this.index = -1;
 
-    keyboardObserver.observe(this, {
+    keyEventDispatcher.observe(this, {
       types: {
         ArrowUp: true,
         ArrowDown: true,

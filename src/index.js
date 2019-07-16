@@ -9,7 +9,6 @@ import StatusElement from './elements/StatusElement.js';
 import MenuElement from './elements/MenuElement.js';
 import MenuItemElement from './elements/MenuItemElement.js';
 import MenuButtonElement from './elements/MenuButtonElement.js';
-import QuantitySelectorElement from './elements/QuantitySelectorElement.js';
 
 const elements = [
   TabsElement,
@@ -23,8 +22,7 @@ const elements = [
   MenuElement,
   MenuItemElement,
   MenuButtonElement,
-  QuantitySelectorElement,
-]
+];
 
 const HTMLAnnex = {
   defineAll() {
@@ -35,5 +33,19 @@ const HTMLAnnex = {
 elements.forEach(el => {
   HTMLAnnex[el.name] = el;
 });
+
+export {
+  TabsElement,
+  TabListElement,
+  TabElement,
+  TabPanelElement,
+  AccordionElement,
+  InstructionsElement,
+  FormElement,
+  StatusElement,
+  MenuElement,
+  MenuItemElement,
+  MenuButtonElement,
+};
 
 export default HTMLAnnex;
